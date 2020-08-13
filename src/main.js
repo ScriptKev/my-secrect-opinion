@@ -20,25 +20,10 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+firebase.analytics;
 
 // utils
-const db = firebase.firestore();
-const auth = firebase.auth;
-
-// collection references
-const usersCollection = db.collection('users');
-const postsCollection = db.collection('posts');
-const commentsCollection = db.collection('comments');
-
-// export utils/refs
-export {
-  db,
-  auth,
-  usersCollection,
-  postsCollection,
-  commentsCollection,
-};
-
+export const db = firebase.firestore();
 
 Vue.config.productionTip = false;
 
