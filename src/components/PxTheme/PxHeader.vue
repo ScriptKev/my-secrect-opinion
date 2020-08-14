@@ -3,11 +3,11 @@
     <div class="header__container">
       <section class="theme__title">
         <h2>{{ titleTheme }}</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, cumque.</p>
+        <p> {{ descriptionTheme }} </p>
       </section>
 
       <figure class="theme__img">
-        <img src="" alt="theme img" width="100%">
+        <img :src="require('@/static/img/themes/theme-'+idTheme+'.jpg')" alt="theme img" width="100%">
       </figure>
     </div>
   </header>
@@ -39,12 +39,23 @@
       text-align: center;
     }
   }
+
+  & .theme__title {
+
+  }
+
+  & .theme__img {
+
+    & img {
+      border-radius: 10px;
+    }
+  }
 }
 </style>
 
 <script>
 export default {
   name: 'PxHeader',
-  props: ['titleTheme']
+  props: ['titleTheme', 'descriptionTheme', 'idTheme']
 }
 </script>

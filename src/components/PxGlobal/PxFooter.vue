@@ -7,7 +7,7 @@
     </section>
 
     <section class="footer__copyright">
-      <span>Made in Venezuela / By ScriptKev 💜 👨‍💻</span>
+      <span>Made in Venezuela / By ScriptKev 👨‍💻</span>
     </section>
   </footer>
 </template>
@@ -19,7 +19,7 @@
   padding-top: 10px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr;
   row-gap: 20px;
   height: min-content;
   background-color: #ddbbdd;

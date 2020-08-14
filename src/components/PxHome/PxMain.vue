@@ -4,13 +4,18 @@
       <section class="main__title">
         <h2>Temas en Cuestion</h2>
       </section>
+          <skeleton-loader :loading="Loading" />
 
       <section class="main__themes">
         <div class="main__themes--container">
           <article class="theme" v-for="(t,i) in Themes" :key="i">
-            <figure class="theme__img">
-              <img :src="t.img" :alt="t.id" width="100%">
-            </figure>
+            <router-link :to="'/theme/'+t.id">
+              <figure class="theme__img">
+                <div class="clip__path">
+                  <img :src="require('@/static/img/themes/theme-'+t.id+'.jpg')" :alt="t.id" width="100%">
+                </div>
+              </figure>
+            </router-link>
 
             <section class="theme__description">
               <h4> {{ t.title }} </h4>
@@ -70,13 +75,29 @@
     border-radius: 10px;
 
     &__img {
+      border-radius: 10px 10px 0 0;
       width: 100%;
       height: 65%;
+      cursor: pointer;
+
+      & .clip__path {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        // clip-path: circle(50% at 50% 50%);
+
+      }
 
       & img {
         border-radius: 10px 10px 0 0;
-        width: inherit;
+        width: 100%;
         height: 100%;
+        object-fit: cover;
+        transition: all 600ms;
+        
+        &:hover {
+          transform: scale(1.2)
+        }
 
       }
     }
@@ -105,12 +126,19 @@
 </style>
 
 <script>
+import SkeletonLoader from '@/components/PxHome/SkeletonLoader';
+
 export default {
   name: 'PxMain',
+  components: { SkeletonLoader },
   props: {
     Themes: {
       type: Array,
       required: true
+    },
+    Loading: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -118,6 +146,6 @@ export default {
     goToThemeDetail (index) {
       this.$router.push({ name: 'ThemeDetail', params: { id: index } })
     }
-  }
+  },
 }
 </script>

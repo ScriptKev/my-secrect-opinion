@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+// import './plugins/fontawesome'
 // FIREBASE SETTINGS
 import firebase from 'firebase/app';
 import 'firebase/firestore';

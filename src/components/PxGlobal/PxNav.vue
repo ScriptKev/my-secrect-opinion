@@ -1,10 +1,18 @@
 <template>
   <nav class="nav">
     <div class="nav__container">
-      <router-link to="/">
-        <figure class="nav__logo">
-          <img src="" alt="Logo">
-        </figure>
+      <section class="nav__logo">
+        <router-link to="/">
+          <figure class="nav__logo--container">
+            <img src="" alt="Logo">
+          </figure>
+        </router-link>
+      </section>
+
+      <router-link to="/propuestas">
+        <section class="nav__links">
+            <h5>Propuestas</h5>
+        </section>
       </router-link>
     </div>
   </nav>
@@ -21,14 +29,31 @@
   &__container{
     width: 100%;
     height: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+
+  }
+
+  &__logo {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+  }
+
+  &__links {
+    position: absolute;
+    right: 5%;
+    top: 10px;
+    background-color: blueviolet;
+    color: white;
+    font-weight: normal;
+    border-radius: 5px;
+    padding: 10px;
   }
 }
 </style>
 
 <script>
+
 export default {
   name: 'Nav'
 }

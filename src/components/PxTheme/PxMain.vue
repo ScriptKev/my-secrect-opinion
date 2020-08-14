@@ -2,15 +2,15 @@
   <main class="main">
     <section class="writeYourComment">
       <div class="writeYourComment__container">
-        <input type="text" class="writeYourComment__input" v-model="userComment">
-        <button class="writeYourComment__sumbit cta__primary">Enviar</button>
+        <input type="text" class="writeYourComment__input" v-model="anonymousComment">
+        <button @click="sumbitUserComment" class="writeYourComment__sumbit cta__primary">Enviar</button>
       </div>
     </section>
 
     <section class="comments">
       <div class="comments__container">
         <ul class="comments__list">
-          <li class="comment" v-for="(data, i) in comentarios" :key="i">
+          <li class="comment" v-for="(data, i) in userComments" :key="i">
             <div class="comment__content">
               <div class="comment__content--author">
                 <h4 style="margin-left: 20px;">Anonimo</h4>
@@ -101,31 +101,33 @@ import 'firebase/firestore';
 
 export default {
   name: 'PxMain',
-  props: {
-    comentarios: {
-      type: Array,
-      required: true
-    }
-  },
+  props: ['userComments', 'idTheme'],
 
   data: () => ({
-    userComment: ''
+    anonymousComment: ''
   }),
 
+  computed: {
+    userCommentsComputed () {
+      return this.userComments;
+    },
+  },
+
   methods: {
-    // async sumbitUserComment () {
-    //   try {
-    //     firebase.firestore().collection('Temas').doc('idiologia-de-genero').set({
-    //       userComment: this.userComment
-    //     })
-    //     .then(() => {
-    //       console.log('comentario enviado')
-    //       this.userComment = ''
-    //     })
-    //     .catch((err) => console.error(err))
-    //   } catch (error) {
-    //   }
-    // }
+    async sumbitUserComment () {
+      try {
+        const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
+
+        firebase.firestore().collection('Temas').doc(this.idTheme).update({
+          userComments: arrayUnion(this.anonymousComment)
+        }).then(() => {
+          console.log('comentario enviado')
+          this.anonymousComment = ''
+        }).catch((err) => console.error(err))
+
+      } catch (error) {
+      }
+    }
   },
 }
 </script>

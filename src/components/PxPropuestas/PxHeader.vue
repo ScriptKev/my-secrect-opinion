@@ -2,8 +2,9 @@
   <header class="header">
     <div class="header__container">
       <section class="header__presentation">
-        <h1>My Secrect Opinion</h1>
+        <h1>Puedes crear tu propia propuesta</h1>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eum ea tempora sit cum optio iste saepe id ex facere.</p>
+        <button>Crear propuesta</button>
       </section>
 
       <figure class="header__img--container">
@@ -47,22 +48,28 @@
     grid-area: presentation;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr min-content;
     grid-template-areas:  "title"
-                          "description";
+                          "description"
+                          "cta";
     justify-items: center;
     align-items: center;
 
-    h1 {
+    & h1 {
       grid-area: title;
       font-size: 40px;
+      padding: 0 40px;
     }
 
-    p {
+    & p {
       align-self: flex-start;
       grid-area: description;
       text-align: start;
-      padding: 0 20px;
+      padding: 0 40px;
+    }
+
+    & button {
+      grid-area: cta
     }
   }
 
@@ -86,6 +93,6 @@
 
 <script>
 export default {
-  name: 'PxHeaderHome'
+  name: 'PxHeaderPropuestas'
 }
 </script>

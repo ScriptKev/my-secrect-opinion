@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home__container">
       <PxHeader />
-      <px-main :Themes="Themes" />
+      <px-main :Loading="Loading" :Themes="Themes" />
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -26,9 +26,8 @@ export default {
   name: 'Home',
   components: { PxHeader, PxMain },
   data: () => ({
-
-
-      ThemesVar: []
+      // Themes: [],
+      Loading: false
   }),
 
   computed: {
@@ -36,10 +35,10 @@ export default {
   },
 
   created() {
-    // this.getThemes()
+    // this.getThemes();
   },
 
-    methods: {
+  methods: {
     async getThemes () {
       try {
         // Collection Firebase

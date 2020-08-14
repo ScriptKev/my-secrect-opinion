@@ -1,20 +1,16 @@
 <template>
   <div class="theme">
     <div class="theme__container">
-      <px-header v-if="this.$route.params.id === 'sexualidad'" :titleTheme="themeDetail_Sexualidad.title" />
-      <px-main v-if="this.$route.params.id === 'sexualidad'" :comentarios="themeDetail_Sexualidad.userComments" />
-
-      <px-header v-if="this.$route.params.id === 'ideologia-de-genero'" :titleTheme="themeDetail_Ideologia.title" />
-      <px-main v-if="this.$route.params.id === 'ideologia-de-genero'" :comentarios="themeDetail_Ideologia.userComments" />
-
-      <px-header v-if="this.$route.params.id === 'aprovecha-el-tiempo'" :titleTheme="themeDetail_AprovechaElTiempo.title" />
-      <px-main v-if="this.$route.params.id === 'aprovecha-el-tiempo'" :comentarios="themeDetail_AprovechaElTiempo.userComments" />
+      <px-header :idTheme="themeDetail.id" :descriptionTheme="themeDetail.description" :titleTheme="themeDetail.title" />
+      <px-main :idTheme="themeDetail.id" :userComments="themeDetail.userComments" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
+.theme {
+  min-height: 100vh;
+}
 </style>
 
 <script>
@@ -27,22 +23,7 @@ export default {
   name: 'ThemeDetail',
   components: { PxHeader, PxMain },
   data: () => ({
-    themeDetail_Sexualidad: {
-      title: 'Sexualidad',
-      userComments: [ 'Me Gusta!', 'No me Gusta!' ]
-    },
-
-    themeDetail_Ideologia: {
-      title: 'Ideologia de Genero',
-      userComments: [ 'mm Quizas', 'mm Quizas No' ]
-    },
-
-    themeDetail_AprovechaElTiempo: {
-      id: 'aprovecha-el-tiempo',
-      img: require('@/static/img/themes/theme-sexualidad.jpg'),
-      title: 'Aprovecha el Tiempo',
-      userComments: [ 'Este tema esta interesante jummm', 'Bueeeeeno no es el mejor asi que digamos xd 😂😅' ] },
-
+    themeDetail: {}
   }),
 
   created() {
@@ -53,11 +34,8 @@ export default {
     async getThemeDetail () {
       try {
         const id = this.$route.params.id;
-
-        // const snapshot = await firebase.firestore().collection('Temas').doc(id).get();
-
-        // console.log(snapshot)
-
+        const snapshot = await firebase.firestore().collection('Temas').doc(id).get();
+        this.themeDetail = snapshot.data();
 
       } catch (err) {
         console.error(err)
